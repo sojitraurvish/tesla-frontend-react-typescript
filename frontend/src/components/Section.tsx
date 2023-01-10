@@ -1,13 +1,25 @@
 import styled from "styled-components";
+import Fade from "react-reveal/Fade"
+import { FC } from "react";
 
-const Section=()=>{
+export type SectionProps={
+    mainTitle:string,
+    subTitle:string,
+    imgUrl:string
+}
+
+const Section:FC<SectionProps>=({mainTitle,subTitle,imgUrl})=>{
     return (
-        <Container>
-            <MainText>
-                <h1>Model s</h1>
-                <p>Order Online for Touchless Delivery</p>
-            </MainText>
+        <Container imgUri={imgUrl}>
+           
+                <MainText>
+                    <h1>{mainTitle}</h1>
+                    <p>{subTitle}</p>
+                </MainText>
+
+       
             <ButtonSection>
+               
                 <Buttons>
                     <Btn1>
                         Custom order
@@ -16,17 +28,20 @@ const Section=()=>{
                         Existing order
                     </Btn2>
                 </Buttons>
+                
                 <Arrow src="/images/down-arrow.svg" />
             </ButtonSection>
         </Container>
     )
 }
 
-const Container=styled.div`
+const Container=styled.div<{imgUri:string}>`
 /* overflow-y:hidden; */
     min-width: 100%;
     min-height: 100vh;
-    background-image: url("/images/model-s.jpg");
+    background-image:${(props)=>{
+        return `url("${props.imgUri}")`
+    }};
     background-repeat: no-repeat;
     background-size:cover;
     background-position: center;
